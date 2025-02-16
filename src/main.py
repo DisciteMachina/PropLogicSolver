@@ -39,8 +39,14 @@ class PropLogicSolver:
     def check_contradiction(self, results):
         return all(not result for _, result in results)
 
-solver = PropLogicSolver("(p ∨ q) → (r ∧ ¬s) ∨ t")
+    # Finds truth assignments to make the expression true
+    def find_satisfying_assignments(self, results):
+        satisfying = [values for values, result in results if result]
+        return satisfying
+
+solver = PropLogicSolver("p ∨ q")
 results = solver.truth_table()
 
 print("\nTautology: ", solver.check_tautology(results))
 print("Contradiction: ", solver.check_contradiction(results))
+print("Satisfying Assignments:", solver.find_satisfying_assignments(results))
